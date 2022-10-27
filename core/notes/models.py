@@ -2,23 +2,6 @@ from django.db import models
 import uuid
 from users.models import Profile
 
-class State(models.Model):
-  id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-  name = models.CharField(max_length=255)
-  created_at = models.DateTimeField(auto_now_add=True)
-  cities = models.ManyToManyField('City', related_name='states', blank=True)
-
-  def __str__(self):
-    return self.name
-
-class City:
-  id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-  name = models.CharField(max_length=255)
-  created_at = models.DateTimeField(auto_now_add=True)
-  institutions = models.ManyToManyField('Institution', related_name='cities', blank=True)
-  
-  def __str__(self):
-    return self.name
   
 class Institution(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -28,6 +11,24 @@ class Institution(models.Model):
 
     def __str__(self):
         return self.name
+
+class City(models.Model):
+  id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+  name = models.CharField(max_length=255)
+  created_at = models.DateTimeField(auto_now_add=True)
+  institutions = models.ManyToManyField(Institution, related_name='cities', blank=True)
+  
+  def __str__(self):
+    return self.name
+  
+class State(models.Model):
+  id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+  name = models.CharField(max_length=255)
+  created_at = models.DateTimeField(auto_now_add=True)
+  cities = models.ManyToManyField(City, related_name='states', blank=True)
+
+  def __str__(self):
+    return self.name
 
 class Note(models.Model):
   id = models.UUIDField(default=uuid.uuid4,unique=True,primary_key=True,editable=False)
