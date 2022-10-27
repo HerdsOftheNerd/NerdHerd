@@ -1,0 +1,36 @@
+$border-color: hsl(210, 8%, 85%);
+
+.question-box {
+	height: 100px;
+	border: 0.5px solid $border-color;
+	display: flex;
+	gap: 20px;
+	padding: 10px;
+	width: 100%;
+	.question-box__title {
+		font-size: 20px;
+		padding: 20px;
+	}
+	.question-box__profile-container {
+		display: flex;
+		width: 25%;
+		justify-content: flex-start;
+		gap: 10px;
+		align-items: center;
+		height: 50%;
+		.question-box__profile-container__image {
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			object-fit: cover;
+		}
+		.question-box__profile-container__time {
+			color: grey;
+			font-size: smaller;
+		}
+	}
+	.question-box__title-link {
+		display: flex;
+		align-items: center;
+	}
+}

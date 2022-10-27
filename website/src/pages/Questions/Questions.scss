@@ -1,0 +1,21 @@
+$font-stack: Helvetica, sans-serif;
+$primary-color: #333;
+$border-color: hsl(210, 8%, 85%);
+
+.questions {
+	display: flex;
+	flex-direction: column;
+	width: 85%;
+	.questions__top {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		height: 100px;
+		.questions__top-title {
+			font-family: $font-stack;
+			font-size: 20px;
+			color: $primary-color;
+			padding: 20px;
+		}
+	}
+}

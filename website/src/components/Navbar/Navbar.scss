@@ -1,0 +1,56 @@
+$border-color: hsl(210, 8%, 85%);
+
+.nav-divider {
+	display: flex;
+	height: 100%;
+}
+
+.side-nav {
+	width: 280px;
+}
+
+.navbar {
+	display: flex !important;
+	justify-content: space-around !important;
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+	position: sticky;
+	top: 0;
+	z-index: 1;
+}
+
+.search {
+	width: 100%;
+}
+
+.search input {
+	width: 100% !important;
+}
+
+.collapse {
+	width: 60%;
+	flex-grow: 0 !important;
+}
+
+// nav {
+// 	border-right: 1px solid $border-color !important;
+// }
+
+.main-nav {
+	height: 100vh;
+}
+
+.btn-container {
+	display: flex;
+	gap: 20px;
+}
+
+.row {
+	width: 100%;
+}
+
+.profile-pic {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	object-fit: cover;
+}
