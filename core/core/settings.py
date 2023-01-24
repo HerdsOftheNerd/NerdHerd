@@ -33,7 +33,8 @@ INSTALLED_APPS = [
     # MyApps
     'users.apps.UsersConfig',
     'questionanswer.apps.QuestionanswerConfig',
-    'notes.apps.NotesConfig'
+    'notes.apps.NotesConfig',
+    'papers.apps.PapersConfig',
     ]
 
 MIDDLEWARE = [
