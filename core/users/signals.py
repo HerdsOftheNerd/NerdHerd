@@ -12,6 +12,7 @@ def createProfile(sender,instance,created,**kwargs):
       username = user.username,
       email = user.email,
       name = user.first_name,
+      is_admin = user.is_superuser
     )
     
 # def updateUser(sender,instance,created,**kwargs):
