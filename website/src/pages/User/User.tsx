@@ -2,10 +2,14 @@ import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 interface User {
-	id: number
-	username: string
+	user: number
+	created: string
 	email: string
-	token: string
+	id: string
+	name: string
+	profile_image: string
+	username: string
+	is_admin: boolean
 }
 
 function User() {

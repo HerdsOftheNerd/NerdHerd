@@ -112,3 +112,11 @@ img {
 	min-width: 100%;
 	height: auto;
 }
+
+.papers__top__button-container {
+	display: flex;
+	margin-top: 50px;
+	flex-direction: row;
+	justify-content: flex-end;
+	width: 100%;
+}

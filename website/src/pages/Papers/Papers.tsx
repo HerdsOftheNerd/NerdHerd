@@ -44,6 +44,19 @@ const Papers: React.FC = () => {
 		<div>
 			<PageWithSideNav showSideNav={true}>
 				<div>
+					{user.is_admin ? (
+						<div className="papers__top__button-container">
+							<Link
+								to="upload"
+								className="inline-block px-6 py-2.5 bg-blue-400 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-500 hover:shadow-lg focus:bg-blue-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-600 active:shadow-lg transition duration-150 ease-in-out mr-10 upload"
+							>
+								Upload Paper
+							</Link>
+						</div>
+					) : (
+						<div></div>
+					)}
+
 					<div uk-filter="target: .js-filter">
 						<ul className="selector uk-subnav uk-subnav-pill">
 							<div className="picker-year">
@@ -74,6 +87,7 @@ const Papers: React.FC = () => {
 								<a href="#">Hindi</a>
 							</li>
 						</ul>
+
 						<ul className="js-filter papers">
 							{papers.map((paper) => {
 								return (
