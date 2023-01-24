@@ -15,7 +15,7 @@ urlpatterns = [
   path('questions/<str:pk>/answers/<str:ans_pk>',each_answers),
   path('users/login',login_user),
   path('users/register',register_user),
-  path("users/<str:pk>", get_user),
+  path("users/", get_user),
   path("notes/",notes),
   path("papers/",papers),
   path("papers/<str:query>",paper)

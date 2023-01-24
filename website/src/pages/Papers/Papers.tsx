@@ -1,17 +1,43 @@
 import React, { useState, useEffect } from 'react'
-import { Link, parsePath } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import PageWithSideNav from '../../components/PageWithSideNav/PageWithSideNav'
 import { papers } from './data'
 // @ts-ignore
 import YearPicker from 'react-year-picker'
 import './Paper.scss'
 
-const Papers: React.FC = () => {
-	const [filteredPapers, setFilteredPapers] = useState(papers)
+interface Paper {
+	id: number
+	subject: string
+	school: string
+	year: string
+	exam: string
+	standard: string
+	created: string
+	thumbnail: string
+	pdf: string
+	author: string
+}
 
-	const handleChange = (e: number) => {
-		let year: number = e
-		setFilteredPapers(papers.filter((paper) => paper.Year == year))
+const Papers: React.FC = () => {
+	const { user } = useSelector((state: any) => state.user)
+	const [papers, setPapers] = useState<Paper[]>([])
+
+	useEffect(() => {
+		async function fetchQuestion() {
+			const request = await fetch('http://localhost:8000/api/papers/')
+			let response = await request.json()
+			setPapers(response)
+		}
+		fetchQuestion()
+		return () => {}
+	}, [])
+
+	const handleChange = async (e: number) => {
+		const request = await fetch(`http://localhost:8000/api/papers/${e}`)
+		let response = await request.json()
+		setPapers(response)
 	}
 
 	return (
@@ -26,37 +52,42 @@ const Papers: React.FC = () => {
 							<li uk-filter-control=".tag-Math">
 								<a href="Math">Math</a>
 							</li>
-							<li uk-filter-control=".tag-English-1">
+							<li uk-filter-control=".tag-ENGLISH-1">
 								<a href="#">English-1</a>
 							</li>
-							<li uk-filter-control=".tag-English-2">
+							<li uk-filter-control=".tag-ENGLISH-2">
 								<a href="#">English-2</a>
 							</li>
-							<li uk-filter-control=".tag-Physics">
+							<li uk-filter-control=".tag-PHYSICS">
 								<a href="#">Physics</a>
 							</li>
-							<li uk-filter-control=".tag-Chemistry">
+							<li uk-filter-control=".tag-CHEMISTRY">
 								<a href="#">Chemistry</a>
 							</li>
-							<li uk-filter-control=".tag-Biology">
+							<li uk-filter-control=".tag-BIOLOGY">
 								<a href="#">Biology</a>
 							</li>
-							<li uk-filter-control=".tag-Computer">
+							<li uk-filter-control=".tag-COMPUTER">
 								<a href="#">Computer</a>
 							</li>
-							<li uk-filter-control=".tag-Hindi">
+							<li uk-filter-control=".tag-HINDI">
 								<a href="#">Hindi</a>
 							</li>
 						</ul>
 						<ul className="js-filter papers">
-							{filteredPapers.map((paper) => {
+							{papers.map((paper) => {
 								return (
-									<li className={`tag-${paper.Subject} card`}>
+									<li className={`tag-${paper.subject} card`}>
 										<Link to={`/papers/${paper.id}`}>
-											<img src={`${paper.Thumbnail}`} className="card-image" />
+											<img
+												src={`http://localhost:8000${paper.thumbnail}`}
+												className="card-image"
+											/>
 											<div className="container">
 												<h4>
-													<b>{paper.Subject}</b>
+													<b>
+														{paper.school} {paper.year} {paper.exam}
+													</b>
 												</h4>
 												<p>{paper.author}</p>
 											</div>

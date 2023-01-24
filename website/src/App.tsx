@@ -21,9 +21,9 @@ function App() {
 						<Route index element={<Landing></Landing>} />
 					</Route>
 					<Route path="user" element={<Navbar />}>
+						<Route index element={<User />}></Route>
 						<Route path="login" element={<Login />}></Route>
 						<Route path="register" element={<Register />}></Route>
-						<Route path=":id" element={<User />}></Route>
 					</Route>
 					<Route path="questions" element={<Navbar />}>
 						<Route index element={<Questions></Questions>}></Route>

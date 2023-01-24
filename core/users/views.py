@@ -1,6 +1,8 @@
 from rest_framework.authtoken.models import Token
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view,permission_classes,authentication_classes
 from rest_framework.response import Response
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from .serializers import LoginValidator,RegisterSerializer,ProfileSerializer
 from django.contrib.auth import authenticate
@@ -51,13 +53,21 @@ def register_user(request):
       'profile':serializer.data
     },status=status.HTTP_201_CREATED)
     
-        
+@permission_classes([IsAuthenticated])
+@authentication_classes([TokenAuthentication])
 @api_view(['GET'])
-def get_user(request,pk):
-  profile = Profile.objects.get(id=pk)
+def get_user(request):
+  # try:
+  profile = Profile.objects.get(user__id=request.user.id)
   serializer = ProfileSerializer(profile)
   return Response({
     'status':True,
     'user':serializer.data
   },status=status.HTTP_200_OK)
+  # except:
+  #   return Response(
+  #     {
+  #       'status':False,
+  #       'error':"User not found"
+  #     },status.HTTP_400_BAD_REQUEST)
     

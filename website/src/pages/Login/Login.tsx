@@ -8,6 +8,10 @@ function Login() {
 	const dispatch = useDispatch()
 	const navigation = useNavigate()
 	const error = useSelector((state: any) => state.user.error)
+	const { user } = useSelector((state: any) => state.user)
+	if (user) {
+		return <div>Already logged in</div>
+	}
 	async function handleSubmit(e: any) {
 		e.preventDefault()
 		let username = e.target.username.value

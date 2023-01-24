@@ -1,27 +1,29 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import axios from 'axios'
-
-const client = axios.create({
-	baseURL: 'http://localhost:8000/api/users',
-})
+import { useSelector } from 'react-redux'
 
 interface User {
 	id: number
 	username: string
 	email: string
+	token: string
 }
 
 function User() {
-	const { id } = useParams()
+	const { token } = useSelector((state: any) => state.user)
 	const [user, setUser] = useState<User>()
 	useEffect(() => {
 		async function fetchUser() {
-			const response = await client.get(`/${id}`)
-			setUser(response.data.user)
+			const response = await fetch('http://localhost:8000/api/users/', {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Token ${token}`,
+				},
+			})
+			const data = await response.json()
+			setUser(data.user)
 		}
 		fetchUser()
-		console.log(user)
 	}, [])
 	return (
 		<div>
