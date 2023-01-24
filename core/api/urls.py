@@ -2,6 +2,7 @@ from django.urls import path
 from questionanswer.views import *
 from users.views import login_user,register_user,get_user
 from notes.views import notes
+from papers.views import papers,paper
 
 
 urlpatterns = [
@@ -15,5 +16,7 @@ urlpatterns = [
   path('users/login',login_user),
   path('users/register',register_user),
   path("users/<str:pk>", get_user),
-  path("notes/",notes)
+  path("notes/",notes),
+  path("papers/",papers),
+  path("papers/<str:query>",paper)
 ]
