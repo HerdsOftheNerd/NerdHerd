@@ -1,0 +1,114 @@
+.card:hover {
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container {
+	padding: 2px 16px;
+}
+
+.card {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	transition: 0.3s;
+	border-radius: 5px; /* 5px rounded corners */
+	width: 30%;
+}
+
+/* Add rounded corners to the top left and the top right corner of the image */
+img {
+	border-radius: 5px 5px 0 0;
+}
+
+.papers {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 60px;
+	margin-left: 50px;
+	margin-top: 100px;
+}
+
+.filter {
+	position: relative;
+	display: inline-block;
+}
+
+.filter__button {
+	border-radius: 0.125rem;
+	padding: 0.5rem 1rem;
+	background-color: #2b7de9;
+	background-image: none;
+	cursor: pointer;
+	border: transparent;
+	font-weight: 600;
+	color: white;
+	font-size: 16px;
+	line-height: 1.5;
+}
+
+.filter__button:hover {
+	background-color: #176dde;
+}
+.filter__button:focus {
+	outline: 1px dotted;
+	outline: 1px auto -webkit-focus-ring-color;
+}
+
+.filter__dropdown {
+	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+	padding: 0.25rem;
+	display: none;
+	width: 16rem;
+	z-index: 50;
+	left: 0;
+	max-height: calc(100vh - 152px);
+	position: absolute;
+	margin-top: 0.5rem;
+	background-color: white;
+}
+@media (min-width: 768px) {
+	.filter__dropdown {
+		display: block;
+	}
+}
+.filter__dropdown__actions {
+	border-top-width: 1px;
+	border-top-color: #e4e7eb;
+	border-top-style: solid;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding: 0.75rem 0.5rem 0.25rem 0.5rem;
+}
+
+.filter__dropdown__actions button {
+	border-radius: 0.125rem;
+	padding: 0.25rem 0.5rem;
+	background-color: #2b7de9;
+	border-color: transparent;
+	color: white;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.selector {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 50px auto;
+	width: 100%;
+	height: 100%;
+}
+
+.picker-year {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 50px auto;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+}
+
+.card-image {
+	min-width: 100%;
+	height: auto;
+}

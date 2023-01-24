@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { useSelector } from 'react-redux'
-import { loginSuccess, initiateRequest, loginFail } from '../features/user'
+import { loginSuccess, initiateRequest, loginFail } from '../../features/user'
 import axios from 'axios'
 
 function Login() {
