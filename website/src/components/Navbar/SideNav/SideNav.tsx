@@ -34,9 +34,6 @@ function SideNav() {
 							return isActive ? 'nav-link active' : 'nav-link text-dark'
 						}}
 					>
-						<svg className="bi me-2" width="16" height="16">
-							<use xlinkHref="#speedometer2"></use>
-						</svg>
 						Questions
 					</NavLink>
 				</li>
@@ -47,9 +44,6 @@ function SideNav() {
 							return isActive ? 'nav-link active' : 'nav-link text-dark'
 						}}
 					>
-						<svg className="bi me-2" width="16" height="16">
-							<use xlinkHref="#speedometer2"></use>
-						</svg>
 						Papers
 					</NavLink>
 				</li>
