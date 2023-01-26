@@ -18,5 +18,5 @@ urlpatterns = [
   path("users/", get_user),
   path("notes/",notes),
   path("papers/",papers),
-  path("papers/<str:query>",paper)
+  path("papers/<str:pk>",paper)
 ]

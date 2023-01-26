@@ -2,110 +2,199 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { logout } from '../../../features/user'
 import { useDispatch } from 'react-redux'
+import { Autocomplete, TextField } from '@mui/material'
+import Box from '@mui/material/Box'
+import Grid from '@mui/material/Grid'
+import Stack from '@mui/material/Stack'
+import Button from '@mui/material/Button'
+import Avatar from '@mui/material/Avatar'
+import Menu from '@mui/material/Menu'
+import { Container } from '@mui/system'
+import MenuItem from '@mui/material/MenuItem'
+import ListItemIcon from '@mui/material/ListItemIcon'
+import IconButton from '@mui/material/IconButton'
+import Tooltip from '@mui/material/Tooltip'
+import Settings from '@mui/icons-material/Settings'
+import Logout from '@mui/icons-material/Logout'
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import './TopNav.scss'
 
 function TopNav() {
 	const navigate = useNavigate()
-	const dispatch = useDispatch()
 	const { user } = useSelector((state: any) => state.user)
-	function handleLogout() {
-		dispatch(logout() as any)
-		navigate('/')
+	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+	const [searchPhrase, setSearchPhrase] = React.useState<string>('')
+	const open = Boolean(anchorEl)
+	const [papers, setPapers] = useState<any>([])
+	let allPapers: any = []
+	const navigation = useNavigate()
+
+	async function fetchQuestion() {
+		const request = await fetch('http://localhost:8000/api/papers/')
+		let response = await request.json()
+		for (let paper of response) {
+			allPapers.push({ label: paper.school })
+		}
+		// setPapers(allPapers)
 	}
+
+	useEffect(() => {
+		fetchQuestion()
+		return () => {}
+	}, [])
+
+	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+		setAnchorEl(event.currentTarget)
+	}
+	const handleClose = () => {
+		setAnchorEl(null)
+	}
+	const handleSubmit = (e: any) => {
+		e.preventDefault()
+		// navigate('/papers')
+	}
+
 	return (
 		<nav className="navbar navbar-expand-lg navbar-light bg-light">
-			<div className="container">
-				<div className="row">
-					<div className="col-3">
-						<a className="navbar-brand" href="/">
-							Nerdherd
-						</a>
-					</div>
-					<div className="col-8">
-						<form className="form-inline search">
-							<input
-								className="form-control mr-sm-2"
-								type="search"
-								placeholder="Search"
-								aria-label="Search"
-							/>
-						</form>
-					</div>
-					<div className="col-1">
-						<div className="btn-container">
-							{user != null ? (
-								// <button
-								// 	className="btn btn-outline-danger my-2 my-sm-0"
-								// 	type="submit"
-								// 	onClick={handleLogout}
-								// 	Logout
-								// </button>
-								// <img
-								// 	className="profile-pic"
-								// 	src={`http://localhost:8000${user.profile}`}
-								// 	alt=""
-								// />
-								<a
-									href="#"
-									className="d-flex align-items-center text-white text-decoration-none"
-									id="dropdownUser1"
-									data-bs-toggle="dropdown"
-									aria-expanded="false"
-								>
-									<img
-										src={`http://localhost:8000${user.profile_image}`}
-										className="profile-pic"
-									/>
-									<ul
-										className="dropdown-menu dropdown-menu-dark text-small shadow"
-										aria-labelledby="dropdownUser1"
-									>
-										<li>
-											<a className="dropdown-item" href="#">
-												New project...
-											</a>
-										</li>
-										<li>
-											<a className="dropdown-item" href="#">
-												Settings
-											</a>
-										</li>
-										<li>
-											<a className="dropdown-item" href="#">
-												Profile
-											</a>
-										</li>
-										<li>
-											<hr className="dropdown-divider" />
-										</li>
-										<li>
-											<a className="dropdown-item" href="#">
-												Sign out
-											</a>
-										</li>
-									</ul>
-								</a>
-							) : (
-								<>
-									<button
-										type="submit"
-										onClick={() => navigate('/user/login')}
-										className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-									>
-										Login
-									</button>
-									<button
-										type="submit"
-										onClick={() => navigate('/user/register')}
-										className="inline-block px-6 py-0.5 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
-									>
-										Register
-									</button>
-								</>
+			<Grid
+				container
+				spacing={2}
+				columns={4}
+				sx={{
+					display: 'flex',
+					alignItems: 'center',
+					textAlign: 'center',
+					height: '100%',
+				}}
+			>
+				<Grid item xs={1}>
+					<a className="navbar-brand" href="/">
+						Nerdherd
+					</a>
+				</Grid>
+				<Grid item xs={2}>
+					<form onSubmit={handleSubmit}>
+						<Autocomplete
+							disablePortal
+							id="combo-box-demo"
+							options={papers}
+							onChange={(e: any) => {
+								setSearchPhrase(e.target.value)
+							}}
+							renderInput={(params) => (
+								<TextField {...params} label="Search" name="search" />
 							)}
-						</div>
-					</div>
-				</div>
-			</div>
+						/>
+					</form>
+				</Grid>
+				<Grid item xs={1}>
+					<Container
+						sx={{
+							display: 'flex',
+							alignItems: 'center',
+							textAlign: 'center',
+							height: '100%',
+						}}
+					>
+						{user != null ? (
+							<Stack direction="row" spacing={2}>
+								<Box
+									sx={{
+										display: 'flex',
+										alignItems: 'center',
+										textAlign: 'center',
+									}}
+								>
+									<Tooltip title="Account settings">
+										<IconButton
+											onClick={handleClick}
+											size="small"
+											sx={{ ml: 2 }}
+											aria-controls={open ? 'account-menu' : undefined}
+											aria-haspopup="true"
+											aria-expanded={open ? 'true' : undefined}
+										>
+											<Avatar sx={{ width: 32, height: 32 }}>
+												{user.username[0].toUpperCase()}
+											</Avatar>
+										</IconButton>
+									</Tooltip>
+								</Box>
+								<Menu
+									anchorEl={anchorEl}
+									id="account-menu"
+									open={open}
+									onClose={handleClose}
+									onClick={handleClose}
+									PaperProps={{
+										elevation: 0,
+										sx: {
+											overflow: 'visible',
+											filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+											mt: 1.5,
+											'& .MuiAvatar-root': {
+												width: 32,
+												height: 32,
+												ml: -0.5,
+												mr: 1,
+											},
+											'&:before': {
+												content: '""',
+												display: 'block',
+												position: 'absolute',
+												top: 0,
+												right: 14,
+												width: 10,
+												height: 10,
+												bgcolor: 'background.paper',
+												transform: 'translateY(-50%) rotate(45deg)',
+												zIndex: 0,
+											},
+										},
+									}}
+									transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+									anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+								>
+									<MenuItem onClick={handleClose}>
+										<ListItemIcon>
+											<Settings fontSize="small" />
+										</ListItemIcon>
+										Settings
+									</MenuItem>
+									<MenuItem onClick={handleClose}>
+										<Link to={'/user/logout'}>
+											<ListItemIcon>
+												<Logout fontSize="small" />
+											</ListItemIcon>
+											Logout
+										</Link>
+									</MenuItem>
+								</Menu>
+							</Stack>
+						) : (
+							<Stack direction="row" spacing={2}>
+								<Button
+									variant="contained"
+									type="submit"
+									onClick={() => navigate('/user/login')}
+								>
+									Login
+								</Button>
+								<Button
+									variant="contained"
+									color="success"
+									type="submit"
+									autoCapitalize="no"
+									onClick={() => navigate('/user/register')}
+								>
+									SignUp
+								</Button>
+							</Stack>
+						)}
+					</Container>
+				</Grid>
+			</Grid>
 		</nav>
 	)
 }

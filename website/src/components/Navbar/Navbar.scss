@@ -7,6 +7,7 @@ $border-color: hsl(210, 8%, 85%);
 
 .side-nav {
 	width: 280px;
+	height: 100%;
 }
 
 .navbar {
@@ -20,6 +21,7 @@ $border-color: hsl(210, 8%, 85%);
 
 .search {
 	width: 100%;
+	height: 70px !important;
 }
 
 .search input {

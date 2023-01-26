@@ -1,6 +1,9 @@
 import './QuestionBox.scss'
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
+import Avatar from '@mui/material/Avatar'
+import IconButton from '@mui/material/IconButton'
+import Tooltip from '@mui/material/Tooltip'
 
 function QuestionBox({ question }: any) {
 	useEffect(() => {
@@ -37,11 +40,13 @@ function QuestionBox({ question }: any) {
 	return (
 		<div key={question.id} className="question-box">
 			<div className="question-box__profile-container">
-				<img
-					src={`http://localhost:8000${question.author.profile_image}`}
-					alt=""
-					className="question-box__profile-container__image"
-				/>
+				<Tooltip title="Account settings">
+					<IconButton size="small" sx={{ ml: 2 }} aria-haspopup="true">
+						<Avatar sx={{ width: 32, height: 32 }}>
+							{question.author.username[0].toUpperCase()}
+						</Avatar>
+					</IconButton>
+				</Tooltip>
 				<p className="question-box__profile-container__author-username">
 					<Link to={`/user/${question.author.id}`}>
 						{question.author.username}

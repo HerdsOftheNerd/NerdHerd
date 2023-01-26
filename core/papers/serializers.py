@@ -15,5 +15,6 @@ class PaperValidator(serializers.Serializer):
   standard = serializers.CharField()
   thumbnail = serializers.ImageField()
   pdf = serializers.FileField()
+  duration = serializers.IntegerField()
   
   

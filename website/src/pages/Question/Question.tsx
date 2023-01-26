@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import Button from '@mui/material/Button'
 import { Link } from 'react-router-dom'
 import './Question.css'
 
@@ -20,6 +21,10 @@ function Questions() {
 	const [description, setDescription] = useState<string>()
 	const { token } = useSelector((state: any) => state.user)
 	const { id } = useParams()
+	const navigate = useNavigate()
+	const handleClick = () => {
+		navigate(-1)
+	}
 	useEffect(() => {
 		http: fetch(`http://localhost:8000/api/questions/${id}`)
 			.then((response) => response.json())
@@ -110,7 +115,7 @@ function Questions() {
 					onClick={handleSubmit}
 				/>
 			</div>
-			<Link to="/">← Back</Link>
+			<Button onClick={handleClick}>← Back</Button>
 		</div>
 	)
 }

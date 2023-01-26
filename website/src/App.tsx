@@ -10,6 +10,8 @@ import AskQuestion from './pages/AskQuestion/AskQuestion'
 import Papers from './pages/Papers/Papers'
 import Paper from './pages/Paper/Paper'
 import NotFound from './pages/NotFound/NotFound'
+import Logout from './pages/Logout/Logout'
+import UploadPaper from './pages/UploadPaper/UploadPaper'
 import ProtectedRoute from './components/ProtectedRoute'
 import './App.css'
 
@@ -24,6 +26,7 @@ function App() {
 					<Route index element={<User />}></Route>
 					<Route path="login" element={<Login />}></Route>
 					<Route path="register" element={<Register />}></Route>
+					<Route path="logout" element={<Logout />}></Route>
 				</Route>
 				<Route path="questions" element={<Navbar />}>
 					<Route index element={<Questions></Questions>}></Route>
@@ -40,6 +43,7 @@ function App() {
 						}
 					></Route>
 					<Route path=":id" element={<Paper></Paper>}></Route>
+					<Route path="upload" element={<UploadPaper></UploadPaper>}></Route>
 				</Route>
 			</Routes>
 		</div>

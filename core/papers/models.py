@@ -33,6 +33,7 @@ class Paper(models.Model):
   created = models.DateTimeField(auto_now_add=True)
   thumbnail = models.ImageField(upload_to='papers/thumbnails')
   pdf = models.FileField(upload_to='papers/pdf')
+  duration = models.IntegerField(default=2*60*60000)
   
   def __str__(self):
     return f"{self.school} {self.subject} {self.exam} {self.year} "
