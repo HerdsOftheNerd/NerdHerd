@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 // @ts-ignore
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack5'
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
-import 'react-pdf/dist/esm/Page/TextLayer.css'j
+import 'react-pdf/dist/esm/Page/TextLayer.css'
 import Box from '@mui/material/Box'
 import { Button } from '@mui/material'
 import Slider from '@mui/material/Slider'
