@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
-from .serializers import LoginValidator,RegisterSerializer,ProfileSerializer
+from .serializers import LoginValidator,RegisterSerializer,ProfileSerializer,ProfileValidator
 from django.contrib.auth import authenticate
 from .models import Profile
 
@@ -55,19 +55,33 @@ def register_user(request):
     
 @permission_classes([IsAuthenticated])
 @authentication_classes([TokenAuthentication])
-@api_view(['GET'])
+@api_view(['GET','PUT'])
 def get_user(request):
-  # try:
-  profile = Profile.objects.get(user__id=request.user.id)
-  serializer = ProfileSerializer(profile)
-  return Response({
-    'status':True,
-    'user':serializer.data
-  },status=status.HTTP_200_OK)
-  # except:
-  #   return Response(
-  #     {
-  #       'status':False,
-  #       'error':"User not found"
-  #     },status.HTTP_400_BAD_REQUEST)
-    
+  try:
+    if request.method == 'GET':
+      profile = Profile.objects.get(user__id=request.user.id)
+      serializer = ProfileSerializer(profile)
+      return Response({
+        'status':True,
+        'user':serializer.data
+      },status=status.HTTP_200_OK)
+    else:
+      profile = Profile.objects.get(user__id=request.user.id)
+      serializer = ProfileValidator(data=request.data,instance=profile)
+      if serializer.is_valid():
+        user = serializer.save()
+        serializer = ProfileSerializer(user)
+        return Response({
+          'status':True,
+          'user':serializer.data
+        },status=status.HTTP_202_ACCEPTED)
+      else:
+        return Response({
+          'status':False,
+          'error':serializer.errors
+        },status=status.HTTP_400_BAD_REQUEST)
+  except Exception as e:
+    return Response({
+      'status':False,
+      'error':str(e)
+    },status=status.HTTP_400_BAD_REQUEST)

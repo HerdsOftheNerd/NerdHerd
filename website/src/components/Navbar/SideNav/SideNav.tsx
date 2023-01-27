@@ -12,7 +12,6 @@ function SideNav() {
 					<use xlinkHref="#bootstrap"></use>
 				</svg>
 			</a>
-			<hr></hr>
 			<ul className="nav nav-pills flex-column mb-auto">
 				<li className="nav-item">
 					<NavLink
@@ -48,7 +47,6 @@ function SideNav() {
 					</NavLink>
 				</li>
 			</ul>
-			<hr></hr>
 		</div>
 	)
 }

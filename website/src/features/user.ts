@@ -28,7 +28,11 @@ export const userSlice = createSlice({
 			if (!state.error) {
 				state.error = null
 			}
-			localStorage.setItem('user', JSON.stringify(action.payload.user))
+			if (action.payload.profile) {
+				localStorage.setItem('user', JSON.stringify(action.payload.profile))
+			} else {
+				localStorage.setItem('user', JSON.stringify(action.payload.user))
+			}
 			localStorage.setItem('token', action.payload.token)
 		},
 		loginFail: (state, action) => {
@@ -45,7 +49,11 @@ export const userSlice = createSlice({
 	},
 })
 
-export const { loginSuccess, loginFail, logout, initiateRequest } =
-	userSlice.actions
+export const {
+	loginSuccess,
+	loginFail,
+	logout,
+	initiateRequest,
+} = userSlice.actions
 
 export default userSlice.reducer

@@ -13,6 +13,7 @@ class Profile(models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE)
   profile_image = models.ImageField(upload_to='profile_pics', default="default.jpeg")
   is_admin = models.BooleanField(default=False)
+  phone_number = models.IntegerField(default=9999999999)
   
   def __str__(self):
     return self.user.username

@@ -48,7 +48,7 @@ function QuestionBox({ question }: any) {
 					</IconButton>
 				</Tooltip>
 				<p className="question-box__profile-container__author-username">
-					<Link to={`/user/${question.author.id}`}>
+					<Link to={`/user/${question.author.id}`} className="link">
 						{question.author.username}
 					</Link>
 				</p>

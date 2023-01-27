@@ -33,10 +33,11 @@ function Login() {
 			)
 			dispatch(loginSuccess(data))
 			navigation('/')
-		} catch (error: any) {
+		} catch (error) {
 			console.log(error)
 			dispatch(
 				loginFail({
+					// @ts-ignore
 					error: error.response.data.error,
 				})
 			)
@@ -45,7 +46,7 @@ function Login() {
 	return (
 		<div>
 			<section className="h-screen">
-				<div className="container px-6 py-12 h-full">
+				<div className="px-6 py-12 h-full">
 					<div className="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
 						<div className="md:w-8/12 lg:w-6/12 mb-12 md:mb-0">
 							<img

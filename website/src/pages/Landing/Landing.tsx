@@ -1,4 +1,10 @@
+import PageWithSideNav from '../../components/PageWithSideNav/PageWithSideNav'
+
 function Landing() {
-	return <div></div>
+	return (
+		<PageWithSideNav showSideNav={true}>
+			<div></div>
+		</PageWithSideNav>
+	)
 }
 export default Landing

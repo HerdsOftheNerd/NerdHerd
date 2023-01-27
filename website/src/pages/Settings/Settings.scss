@@ -1,0 +1,59 @@
+.container {
+	width: 150px;
+	height: 150px;
+	display: block;
+	margin: 0 auto;
+}
+
+.outer {
+	margin: auto;
+	border-radius: 100%;
+	position: relative;
+}
+
+.inner {
+	background-color: grey;
+	width: 50px;
+	height: 50px;
+	border-radius: 100%;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+
+.inner:hover {
+	opacity: 0.9;
+}
+
+.inputfile {
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: 1;
+	width: 50px;
+	height: 50px;
+}
+
+.inputfile + label {
+	font-size: 1.25rem;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	display: inline-block;
+	overflow: hidden;
+	width: 50px;
+	height: 50px;
+	pointer-events: none;
+	cursor: progress;
+	line-height: 50px;
+	text-align: center;
+}
+
+.icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100% !important;
+	height: 100% !important;
+	cursor: not-allowed !important;
+	color: white;
+}

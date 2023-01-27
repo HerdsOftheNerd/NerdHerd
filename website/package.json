@@ -6,9 +6,12 @@
 		"@mui/styled-engine": "npm:@mui/styled-engine-sc@latest"
 	},
 	"dependencies": {
+		"@coreui/coreui": "^4.2.6",
+		"@coreui/react": "^4.5.2",
 		"@emotion/react": "^11.10.5",
 		"@emotion/styled": "^11.10.5",
 		"@mui/icons-material": "^5.11.0",
+		"@mui/joy": "^5.0.0-alpha.64",
 		"@mui/material": "^5.11.6",
 		"@mui/styled-engine-sc": "^5.11.0",
 		"@mui/x-date-pickers": "^5.0.15",
@@ -25,6 +28,7 @@
 		"customize-cra": "^1.0.0",
 		"dayjs": "^1.11.7",
 		"emotion": "^11.0.0",
+		"framer-motion": "^8.5.3",
 		"mdb-react-ui-kit": "^5.1.0",
 		"medium-editor": "^5.23.3",
 		"moment": "^2.29.4",

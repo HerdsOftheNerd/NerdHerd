@@ -2,8 +2,20 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import QuestionBox from '../../components/QuestionBox/QuestionBox'
 import { useSelector } from 'react-redux'
+import Grid from '@mui/material/Grid'
 import PageWithSideNav from '../../components/PageWithSideNav/PageWithSideNav'
 import './Questions.scss'
+import { styled } from '@mui/material/styles'
+
+function FormRow() {
+	return (
+		<>
+			<Grid item xs={4}></Grid>
+			<Grid item xs={4}></Grid>
+			<Grid item xs={4}></Grid>
+		</>
+	)
+}
 
 interface Question {
 	id: number
@@ -46,11 +58,15 @@ function Questions() {
 						</Link>
 					</div>
 				</div>
-				<div className="questions__body">
+				<Grid container spacing={1} className={'questions'}>
 					{questions.map((question) => {
-						return <QuestionBox question={question} />
+						return (
+							<Grid container item>
+								<QuestionBox question={question} />
+							</Grid>
+						)
 					})}
-				</div>
+				</Grid>
 			</div>
 		</PageWithSideNav>
 	)

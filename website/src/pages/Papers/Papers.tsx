@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Button } from '@mui/material'
+import { motion } from 'framer-motion'
 import FilterAltOffTwoToneIcon from '@mui/icons-material/FilterAltOffTwoTone'
 import PageWithSideNav from '../../components/PageWithSideNav/PageWithSideNav'
 import { useNavigate } from 'react-router-dom'
@@ -16,6 +17,7 @@ import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
+import { AnimatePresence } from 'framer-motion'
 import Box from '@mui/material/Box'
 import './Paper.scss'
 
@@ -139,7 +141,7 @@ const Papers: React.FC = () => {
 							display="grid"
 							gridTemplateColumns="repeat(20, 1fr)"
 							gap={2}
-							className="p-10 js-filter"
+							className="p-10 js-filter margin-bottom"
 						>
 							{papers.map((paper) => {
 								return (
@@ -148,39 +150,44 @@ const Papers: React.FC = () => {
 										key={paper.id}
 										className={`tag-${paper.subject} card-`}
 									>
-										<Card sx={{ maxWidth: 345 }} className="card">
-											<CardMedia
-												sx={{ height: 140 }}
-												image={`http://localhost:8000${paper.thumbnail}`}
-												title="green iguana"
-											/>
-											<CardContent>
-												<Typography gutterBottom variant="h5" component="div">
-													{paper.subject.charAt(0).toUpperCase() +
-														paper.subject.slice(1).toLowerCase()}
-												</Typography>
-												<Typography
-													variant="body2"
-													color="text.secondary"
-													align="center"
-												>
-													{paper.exam} {paper.year}
-													<Divider />
-													{paper.school}
-												</Typography>
-											</CardContent>
-											<CardActions>
-												{/* <Button size="small">Share</Button> */}
-												<Button
-													size="small"
-													onClick={() => {
-														handleRoute(paper.id)
-													}}
-												>
-													Solve
-												</Button>
-											</CardActions>
-										</Card>
+										<motion.div
+											whileHover={{ scale: 1.1 }}
+											whileTap={{ scale: 0.9 }}
+										>
+											<Card sx={{ maxWidth: 345 }} className="card">
+												<CardMedia
+													sx={{ height: 140 }}
+													image={`http://localhost:8000${paper.thumbnail}`}
+													title="green iguana"
+												/>
+												<CardContent>
+													<Typography gutterBottom variant="h5" component="div">
+														{paper.subject.charAt(0).toUpperCase() +
+															paper.subject.slice(1).toLowerCase()}
+													</Typography>
+													<Typography
+														variant="body2"
+														color="text.secondary"
+														align="center"
+													>
+														{paper.exam} {paper.year}
+														<Divider />
+														{paper.school}
+													</Typography>
+												</CardContent>
+												<CardActions>
+													{/* <Button size="small">Share</Button> */}
+													<Button
+														size="small"
+														onClick={() => {
+															handleRoute(paper.id)
+														}}
+													>
+														Solve
+													</Button>
+												</CardActions>
+											</Card>
+										</motion.div>
 									</Box>
 								)
 							})}

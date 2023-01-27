@@ -157,10 +157,12 @@ function TopNav() {
 									anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
 								>
 									<MenuItem onClick={handleClose}>
-										<ListItemIcon>
-											<Settings fontSize="small" />
-										</ListItemIcon>
-										Settings
+										<Link to={'/user/settings'}>
+											<ListItemIcon>
+												<Settings fontSize="small" />
+											</ListItemIcon>
+											Settings
+										</Link>
 									</MenuItem>
 									<MenuItem onClick={handleClose}>
 										<Link to={'/user/logout'}>

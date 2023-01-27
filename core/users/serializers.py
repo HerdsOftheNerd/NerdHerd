@@ -31,4 +31,22 @@ class ProfileSerializer(serializers.ModelSerializer):
     model = Profile
     fields = "__all__"
 
+class ProfileValidator(serializers.Serializer):
+  username = serializers.CharField()
+  name = serializers.CharField()
+  email = serializers.EmailField()
+  bio = serializers.CharField()
+  phone_number = serializers.IntegerField()
   
+  def validate(self,data):
+    return data
+  
+  def update(self, instance, validated_data):
+    print(validated_data)
+    instance.name = validated_data.get('name')
+    instance.email = validated_data.get('email')
+    instance.username = validated_data.get('username')
+    instance.bio = validated_data.get('bio')
+    instance.phone_number = validated_data.get('phone_number')
+    instance.save()
+    return instance

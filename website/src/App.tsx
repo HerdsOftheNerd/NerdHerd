@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import Landing from './pages/Landing/Landing'
 import User from './pages/User/User'
 import Register from './pages/Register/Register'
@@ -14,19 +14,24 @@ import Logout from './pages/Logout/Logout'
 import UploadPaper from './pages/UploadPaper/UploadPaper'
 import ProtectedRoute from './components/ProtectedRoute'
 import './App.css'
+import { useEffect } from 'react'
+import Settings from './pages/Settings/Settings'
 
 function App() {
 	return (
 		<div className="main">
 			<Routes>
-				<Route path="" element={<Navbar />}>
-					<Route index element={<Landing></Landing>} />
+				<Route path="" element={<ReRoute></ReRoute>}></Route>
+				<Route path="home" element={<Navbar />}>
+					<Route index element={<Landing></Landing>}></Route>
 				</Route>
+				<Route path="home" element={<Landing></Landing>} />
 				<Route path="user" element={<Navbar />}>
 					<Route index element={<User />}></Route>
 					<Route path="login" element={<Login />}></Route>
 					<Route path="register" element={<Register />}></Route>
 					<Route path="logout" element={<Logout />}></Route>
+					<Route path="settings" element={<Settings></Settings>}></Route>
 				</Route>
 				<Route path="questions" element={<Navbar />}>
 					<Route index element={<Questions></Questions>}></Route>
@@ -51,3 +56,11 @@ function App() {
 }
 
 export default App
+
+const ReRoute = () => {
+	const navigate = useNavigate()
+	useEffect(() => {
+		navigate('/home')
+	})
+	return <div>Rerouting</div>
+}

@@ -15,14 +15,14 @@ def createProfile(sender,instance,created,**kwargs):
       is_admin = user.is_superuser
     )
     
-# def updateUser(sender,instance,created,**kwargs):
-#   profile = instance
-#   user = profile.user
-#   if not created:
-#     user.first_name = profile.name
-#     user.email = profile.email 
-#     user.username = profile.username
-#     user.save()
+def updateUser(sender,instance,created,**kwargs):
+  profile = instance
+  user = profile.user
+  if not created:
+    user.first_name = profile.name
+    user.email = profile.email 
+    user.username = profile.username
+    user.save()
   
   
 # def deleteUser(sender,instance,**kwargs):
@@ -31,6 +31,6 @@ def createProfile(sender,instance,created,**kwargs):
   
   
 # post_delete.connect(deleteUser,sender=Profile)
-# post_save.connect(updateUser,sender=Profile)
+post_save.connect(updateUser,sender=Profile)
 post_save.connect(createProfile,sender=User)
 
